@@ -9,6 +9,7 @@ $ npx create-react-app react-router-dom-example
 
 ```shell
 $ npm install web-vitals
+$ npm install react-router-dom
 ```
 
 
