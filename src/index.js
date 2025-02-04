@@ -4,6 +4,28 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes, NavLink, useParams } from 'react-router-dom';
 
+import styled from 'styled-components';
+
+const SimpleButton = styled.button`
+  color: white;
+  background: green;
+`;
+const LargeButton = styled(SimpleButton)`
+  font-size: 50px;
+`;
+
+const ReactButton = props =>{
+  return <button className={props.className}>{props.children}</button>;
+}
+const ReactLargeButton = styled(ReactButton)`
+  font-size: 50px;
+`;
+
+const PrimaryButton = styled.button`
+  color: ${props => props.primary ? 'white' : 'black'};
+  background: ${props => props.primary ? 'blue' : 'gray'};
+  `;
+
 function Home(){
   return (
     <div>
@@ -74,22 +96,33 @@ function Contact(){
 
 function App(){
   return (
-    <div> 
+    <div>
+      <SimpleButton>Simple Button</SimpleButton>
+      <LargeButton>Large Button</LargeButton>
+      <ReactButton>React Button</ReactButton>
+      <ReactLargeButton>React Large Button</ReactLargeButton>
+      <PrimaryButton>Normal</PrimaryButton>
+      <PrimaryButton primary>Primary</PrimaryButton>
 
       <h1>Hello React Router DOM </h1>
       <ul>
-        <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/topics">Topics</NavLink></li>
-        <li><NavLink to="/contact">Contact</NavLink></li>
+        <li>
+          <NavLink to="/">Home</NavLink>
+        </li>
+        <li>
+          <NavLink to="/topics">Topics</NavLink>
+        </li>
+        <li>
+          <NavLink to="/contact">Contact</NavLink>
+        </li>
       </ul>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/topics/*" element={<Topics />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/*" element={'Not Found'} />
+        <Route path="/*" element={"Not Found"} />
       </Routes>
-
-      </div>
+    </div>
   );
 }
 
