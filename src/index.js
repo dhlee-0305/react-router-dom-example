@@ -1,4 +1,4 @@
-import React, {createContext, useContext} from 'react';
+import React, {createContext, useContext, useState, useReducer} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import './style.css';
@@ -100,8 +100,36 @@ function Contact(){
 function App(){
   const theme = useContext(themeContext);
   console.log('theme:', theme);
+    
+  function countReducer(oldCount, action){
+    switch(action.type){
+      case 'UP':
+        return oldCount + action.number;
+      case 'DOWN':
+        return oldCount - action.number;
+      case 'RESET':
+        return 0;
+    }
+  }
+  const [count, countDispatch] = useReducer(countReducer, 0);
+  function down(){
+    countDispatch({type: 'DOWN', number: number});
+  }
+  function reset(){
+    countDispatch({type: 'RESET', number: number});
+  }
+  function up(){
+    countDispatch({type: 'UP', number: number});
+  }
+
+  function changeNumber(event){
+    setNumber(Number(event.target.value));
+  }
+  const [number, setNumber] = useState(1);
+
   return (
     <div>
+
       <themeContext.Provider value={{ border: "10px solid blue" }}>
         <div className="root" style={theme}>
           <h1>Hello World!</h1>
@@ -115,6 +143,13 @@ function App(){
       <ReactLargeButton>React Large Button</ReactLargeButton>
       <PrimaryButton>Normal</PrimaryButton>
       <PrimaryButton primary>Primary</PrimaryButton>
+      
+      <br />
+      <input type="button" value="-" onClick={down} />
+      <input type="button" value="0" onClick={reset} />
+      <input type="button" value="+" onClick={up} />
+      <input type="text" value={number} onChange={changeNumber} />
+      <span>{count}</span>
 
       <h1>Hello React Router DOM </h1>
       <ul>
