@@ -11,6 +11,10 @@ $ npx create-react-app react-router-dom-example
 $ npm install web-vitals
 $ npm install react-router-dom
 $ npm install styled-components
+$ npm install react-redux # node.js 최신 버전으로 설치 후 진행
+# redux 설치 오류 시
+$ npm install @reduxjs/toolkit react-redux
+
 ```
 
 
